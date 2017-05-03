@@ -1,1 +1,5 @@
 @import "{devsignstudio:viu-ui}/import.scss";
+
+.changing-background {
+    @include transition(all 0.2s $easeInOutNew);
+}

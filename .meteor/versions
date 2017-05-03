@@ -75,6 +75,8 @@ omega:meteor-desktop-bundler@0.6.2
 omega:meteor-desktop-localstorage@0.0.11
 omega:meteor-desktop-watcher@0.6.2
 ordered-dict@1.0.9
+ostrio:cookies@2.2.0
+ostrio:files@1.7.13
 peerlibrary:assert@0.2.5
 peerlibrary:extend-publish@0.3.0
 peerlibrary:fiber-utils@0.8.2

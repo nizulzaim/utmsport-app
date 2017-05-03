@@ -8,7 +8,5 @@ export default [{
     meta: { fixToolbar: true, pageTitle: "Viu Doc" },
     components: {
         default: IndexPage,
-        toolbar: Toolbar,
-        navigation: IndexNavigation,
     }
 }, ];
