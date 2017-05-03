@@ -20,7 +20,7 @@ export const Event = Class.create({
         assemblyLocation: String,
         contactNumber: String,
         imageId: String,
-        enrollId: [],
+        enrollId: [String],
     },
     behaviors: {
         timestamp: {
