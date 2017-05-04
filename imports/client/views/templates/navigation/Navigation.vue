@@ -16,7 +16,7 @@
                     </router-link>
                 </span>
             </nav-list>
-            <router-link to="/dashboard/create-event" exact>
+            <router-link  v-if="loginUser.isAdmin() || loginUser.isStaff()" to="/dashboard/create-event" exact>
                 <nav-list class="nav-item">
                     <icon name="pencil"></icon> Create Event
                 </nav-list>

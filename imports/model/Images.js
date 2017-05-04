@@ -7,8 +7,8 @@ export const Images = new FilesCollection({
     allowClientCode: false, // Disallow remove files from Client
     // debug: true,
     storagePath: '/images/utmsport-app',
-    // permissions: 0774,
-    // parentDirPermissions: 0774,
+    permissions: 0774,
+    parentDirPermissions: 0774,
     collectionName: 'images',
     onBeforeUpload: function (file) {
         if (/jpg|png/i.test(file.extension)) {

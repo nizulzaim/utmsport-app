@@ -20,7 +20,7 @@ export const Event = Class.create({
         assemblyLocation: String,
         contactNumber: String,
         imageId: String,
-        enrollId: [String],
+        enrollId: {type: [String], optional: true, default: []},
     },
     behaviors: {
         timestamp: {
@@ -37,8 +37,11 @@ export const Event = Class.create({
     },
     helpers: {
         getImageLink() {
-            let image = Image.findOne(this.imageId);
-            return image._downloadRoute + "/images/" + image._id + "/original/" + image._id + "." + image.extension;
+            let image = Images.findOne(this.imageId);
+            console.log(image);
+            if (image) {
+                return image._downloadRoute + "/images/" + image._id + "/original/" + image._id + "." + image.extension;
+            }
         }
     }
 });
@@ -64,12 +67,12 @@ if (Meteor.isServer) {
             find: function() {
                 var d = new Date();
                 d.setHours(0,0,0,0);
-                return Booking.find({date: {$gt: d}}, {sort: {dateStart: -1}});
+                return Event.find({dateStart: {$gt: d}}, {sort: {dateStart: -1}});
             },
             children: [
                 {
                     find: function(event) {
-                        return Images.find(event._id).cursor;
+                        return Images.find(event.imageId).cursor;
                     },
                 }
             ]

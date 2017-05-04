@@ -6,6 +6,7 @@
 					<cards>
 						<form @submit.prevent="login">
 							<cards-content>
+								<img src="/img/UTMSE.jpg" class="img-responsive">
 								<textfield v-model="username" placeholder="Acid Username"></textfield>
 								<textfield v-model="password" type="password" placeholder="Password"></textfield>
 							</cards-content>

@@ -110,5 +110,35 @@ if (Meteor.isServer) {
             userType: 2,
             gender: 0,
         });
+
+        user = new User();
+        user.create({
+            username: "mhelmi68",
+            password: "n",
+        }, {
+            name: "Mohamad Helmi",
+            userType: 2,
+            gender: 0,
+        });
+
+        user = new User();
+        user.create({
+            username: "rafael2",
+            password: "n",
+        }, {
+            name: "Rafael Romeli",
+            userType: 2,
+            gender: 0,
+        });
+
+        user = new User();
+        user.create({
+            username: "mnaqib5",
+            password: "n",
+        }, {
+            name: "Muhammad Naqib",
+            userType: 2,
+            gender: 0,
+        });
     }
 }

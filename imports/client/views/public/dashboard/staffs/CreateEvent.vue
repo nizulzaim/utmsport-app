@@ -188,7 +188,7 @@
 
                 ev.callMethod("create", parse, (err, result)=> {
                     if (err) {
-                        return this.$snackbar.run("Error when creating new event", ()=> {}, "OK", "error");
+                        return this.$snackbar.run("Error when creating new event: "+ err.reason, ()=> {}, "OK", "error");
                     }
 
                     return this.$snackbar.run("Succefully add new event", ()=> {});
