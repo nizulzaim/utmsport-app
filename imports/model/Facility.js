@@ -1,10 +1,5 @@
-import {
-    Class
-} from 'meteor/jagi:astronomy';
-import {
-    Meteor
-} from "meteor/meteor";
-
+import {Class} from 'meteor/jagi:astronomy';
+import {Meteor} from "meteor/meteor";
 
 export const Facility = Class.create({
     name: "Facility",
@@ -25,14 +20,6 @@ export const Facility = Class.create({
             removedAtFieldName: 'removedAt'
         }
     },
-    helpers: {
-        isAdmin() {
-            return this.profile.userType.indexOf(0) > -1;
-        },
-        isNormal() {
-            return this.profile.userType.indexOf(1) > -1;
-        }
-    }
 });
 
 if (Meteor.isServer) {
