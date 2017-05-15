@@ -38,7 +38,6 @@ export const Event = Class.create({
     helpers: {
         getImageLink() {
             let image = Images.findOne(this.imageId);
-            console.log(image);
             if (image) {
                 return image._downloadRoute + "/images/" + image._id + "/original/" + image._id + "." + image.extension;
             }

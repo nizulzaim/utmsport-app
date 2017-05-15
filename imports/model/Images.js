@@ -14,7 +14,7 @@ export const Images = new FilesCollection({
         if (/jpg|png/i.test(file.extension)) {
             return true;
         } else {
-            return 'Please input txt or csv file';
+            return 'Please input jpg or png file';
         }
     }
 });
