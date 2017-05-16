@@ -3,3 +3,19 @@
 .changing-background {
     @include transition(all 0.2s $easeInOutNew);
 }
+
+.utm-background {
+    background-color: #5D001D !important;
+}
+
+.utm-background-accent {
+    background-color: #E69305 !important;
+}
+
+.color-Expired {
+    background: $color-grey-50;
+}
+
+.color-Available {
+    // background: $color-green-200;
+}

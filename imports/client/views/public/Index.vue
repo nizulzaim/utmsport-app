@@ -1,5 +1,5 @@
 <template>
-    <div v-wheight="100" class="background-theme">
+    <div v-wheight="100" class="utm-background">
 		<page-container style="height: 100%">
 			<div class="row center-xs middle-xs" style="height: 100%">
 				<div class="col-xs-fluid-24">
@@ -13,7 +13,7 @@
 							<divider></divider>
 							<cards-action>
 								<div class="pull-right">
-									<color-button class="primary" type="submit" v-ripple><icon name="key"></icon> Sign In</color-button>
+									<color-button class="utm-background-accent" type="submit" v-ripple><icon name="key"></icon> Sign In</color-button>
 								</div>
 							</cards-action>
 						</form>

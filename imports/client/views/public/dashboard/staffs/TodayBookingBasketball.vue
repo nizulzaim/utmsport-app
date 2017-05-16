@@ -84,7 +84,7 @@
         meteor: {
             subscribe: {
                 "bookingByDateTime"() {
-                    return ["Badminton", this.time];
+                    return ["Basketball", this.time];
                 }
             },
             books() {

@@ -1,8 +1,7 @@
 <template>
-    <page-container>
-        <div class="font-headline">Active Booking</div>
-        <div v-for="book in bookings" :key="book._id" >
-            <cards v-if="book.status() === 'Available'">
+    <div class="appbar-padding" v-wheight>
+        <page-container>
+            <cards v-for="book in bookings" :key="book._id" :class="'color-' + book.status()">
                 <cards-content>
                     <div class="font-title" v-if="book.facilityClass()">{{book.facilityClass().name}}</div>
                     <div class="font-subhead no-margin">Court No: <span class="font-light">{{book.number}}</span></div>
@@ -11,14 +10,13 @@
                     <div class="font-subhead no-margin">Status: <span class="font-light">{{book.status()}}</span></div>
                 </cards-content>
             </cards>
-        </div>
-        <cards v-if="bookings && bookings.length === 0">
-            <cards-content>
-                <div class="font-title font-light no-margin font-center">No Booking Available</div>
-            </cards-content>
-        </cards>
-        
-    </page-container>
+            <cards v-if="bookings && bookings.length === 0">
+                <cards-content>
+                    <div class="font-title font-light no-margin font-center">No Booking Available</div>
+                </cards-content>
+            </cards>
+        </page-container>
+    </div>
 </template>
 
 <script>
@@ -26,7 +24,7 @@
     export default {
         meteor: {
             subscribe: {
-                bookingsAvailable: [true],
+                bookings: [true],
             },
             bookings() {
                 return Booking.find({}, {sort: {createdAt: -1}});

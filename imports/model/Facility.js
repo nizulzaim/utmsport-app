@@ -42,9 +42,18 @@ if (Meteor.isServer) {
 
     if (!Facility.findOne()) {
         let facility = new Facility();
-        facility.create("badminton");
+        facility.create("Badminton");
 
         facility = new Facility();
-        facility.create("swimming");
+        facility.create("Swimming");
+
+        facility = new Facility();
+        facility.create("Futsal");
+
+        facility = new Facility();
+        facility.create("Basketball");
+
+        facility = new Facility();
+        facility.create("Netball");
     }
 }

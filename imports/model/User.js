@@ -90,6 +90,18 @@ if (Meteor.isServer) {
         };
     });
 
+    Meteor.publishComposite('enrollUsers', function(array) {
+        return {
+            find: function() {
+                if (array) {
+                    return User.find({_id: {$in: array}});
+                }
+                return null;
+                
+            },
+        };
+    });
+
     if (!User.findOne()) {
         let user = new User();
         user.create({

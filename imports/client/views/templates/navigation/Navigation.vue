@@ -14,11 +14,31 @@
                             <icon name="asterisk"></icon> Badminton
                         </nav-list>
                     </router-link>
+                    <router-link to="/dashboard/today-booking/basketball" v-if="loginUser.isStaff() || loginUser.isAdmin()" exact>
+                        <nav-list class="nav-item">
+                            <icon name="asterisk"></icon> Basketball
+                        </nav-list>
+                    </router-link>
+                    <router-link to="/dashboard/today-booking/futsal" v-if="loginUser.isStaff() || loginUser.isAdmin()" exact>
+                        <nav-list class="nav-item">
+                            <icon name="asterisk"></icon> Futsal
+                        </nav-list>
+                    </router-link>
+                    <router-link to="/dashboard/today-booking/netball" v-if="loginUser.isStaff() || loginUser.isAdmin()" exact>
+                        <nav-list class="nav-item">
+                            <icon name="asterisk"></icon> Netball
+                        </nav-list>
+                    </router-link>
                 </span>
             </nav-list>
-            <router-link  v-if="loginUser.isAdmin() || loginUser.isStaff()" to="/dashboard/create-event" exact>
+            <router-link  v-if="loginUser.isAdmin() || loginUser.isUser()" to="/dashboard/create-event" exact>
                 <nav-list class="nav-item">
                     <icon name="pencil"></icon> Create Event
+                </nav-list>
+            </router-link>
+            <router-link  v-if="loginUser.isAdmin() || loginUser.isUser()" to="/dashboard/posted-events" exact>
+                <nav-list class="nav-item">
+                    <icon name="access-point"></icon> My Posted Events
                 </nav-list>
             </router-link>
             <nav-list class="nav-item" :sublist="true" v-if="loginUser.isUser()">
@@ -32,6 +52,16 @@
                     <router-link to="/dashboard/booking/futsal" exact>
                         <nav-list class="nav-item">
                             <icon name="asterisk"></icon> Futsal
+                        </nav-list>
+                    </router-link>
+                    <router-link to="/dashboard/booking/netball" exact>
+                        <nav-list class="nav-item">
+                            <icon name="asterisk"></icon> Netball
+                        </nav-list>
+                    </router-link>
+                    <router-link to="/dashboard/booking/basketball" exact>
+                        <nav-list class="nav-item">
+                            <icon name="asterisk"></icon> Basketball
                         </nav-list>
                     </router-link>
                 </span>

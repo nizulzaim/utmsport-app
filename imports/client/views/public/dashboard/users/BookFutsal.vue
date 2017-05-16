@@ -80,7 +80,7 @@
                 let todayDate=  moment().format("DD MMMM YYYY");
                 this.$confirmation.run(`Are you sure to book Court ${court} at ${time.name}, ${todayDate}?`, ()=> {
                     let book = new Booking();
-                    book.callMethod("create", "Badminton", time.value, court, (err, result) => {
+                    book.callMethod("create", "Futsal", time.value, court, (err, result) => {
                         if(err) {
                             return this.$snackbar.run(err.reason, ()=> {}, "OK", "error");
                             // return this.$snackbar.run(`Failed when trying to book Court ${court} at ${time.name}, ${todayDate}`, ()=> {}, "OK", "error");
@@ -95,13 +95,13 @@
         meteor: {
             subscribe:{
                 "bookingByDateTime"() {
-                    return ["Badminton", this.time];
+                    return ["Futsal", this.time];
                 }
             },
             books() {
                 this.courts = [];
                 
-                for (let i = 1; i <= 10; i++) {
+                for (let i = 1; i <= 4; i++) {
                     let book = Booking.findOne({time: this.time, number: i});
                     let available = true;
 

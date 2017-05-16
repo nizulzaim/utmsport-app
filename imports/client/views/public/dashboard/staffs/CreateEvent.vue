@@ -184,6 +184,14 @@
                     return this.$snackbar.run("Please enter all input", ()=> {}, "OK", "error");
                 }
 
+                let newDate = new Date(parse.dateStart.year, parse.dateStart.month, parse.dateStart.day);
+                let today = new Date();
+                let todayBeginning = today.beginningOfDay();
+
+                if (todayBeginning > newDate) {
+                    return this.$snackbar.run("Event date cannot be in the past", ()=> {}, "OK", "error");
+                }
+
                 let ev = new Event();
 
                 ev.callMethod("create", parse, (err, result)=> {

@@ -42,6 +42,17 @@ export const Booking = Class.create({
         },
         user() {
             return User.findOne(this.userId);
+        },
+        facilityClass() {
+            return Facility.findOne(this.facility);
+        },
+        status() {
+            let todayDate = new Date();
+            if (this.date < todayDate.beginningOfDay()) {
+                return "Expired";
+            }
+
+            return "Available";
         }
     }
 });
@@ -80,6 +91,41 @@ if (Meteor.isServer) {
                 {
                     find: function(book) {
                         return User.find(book.userId);
+                    }
+                }
+            ]
+        };
+    });
+
+    Meteor.publishComposite('bookings', function(userId = false) {
+        return {
+            find: function() {
+                if (userId) {
+                    return Booking.find({userId: this.userId});
+                }
+                return Booking.find();
+            },
+            children: [
+                {
+                    find: function(book) {
+                        return Facility.find(book.facility);
+                    }
+                }
+            ]
+        };
+    });
+
+    Meteor.publishComposite('bookingsAvailable', function(userId = false) {
+        return {
+            find: function() {
+                let date= new Date();
+                date.setHours(0,0,0,0);
+                return Booking.find({userId: this.userId, date: {$gte: date}});
+            },
+            children: [
+                {
+                    find: function(book) {
+                        return Facility.find(book.facility);
                     }
                 }
             ]
