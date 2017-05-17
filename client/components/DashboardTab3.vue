@@ -19,6 +19,11 @@
                 </div>
             </cards-action>
         </cards>
+        <cards v-if="events && events.length === 0">
+            <cards-content>
+                <div class="font-title font-light no-margin font-center">No Events Available</div>
+            </cards-content>
+        </cards>
 
          <reveal v-model="showReveal">
             <div class="col-md-fluid-10">
@@ -26,13 +31,13 @@
                     <div class="font-title utm-background color-white font-center font-light" style="padding: 8px">Participant</div>
                     <cards-content-scrollbar>
                         <list class="hover" :dense="true" v-if="selectedEvent" style="margin: 0 -12px">
-                            <list-item v-for="(opt, index) in selectedEvent.enrollId">
+                            <list-item v-for="(opt, index) in enrollUsers">
                                 <span slot="left">
                                     <icon name="account-circle"></icon>
                                     <!--<checkbox v-model="options[index].option"></checkbox>-->
                                 </span>
-                                <div class="font-body2 no-margin">{{userFromId(opt).profile.name}}</div>
-                                <div class="color-grey-700">{{userFromId(opt).username}}</div>
+                                <div class="font-body2 no-margin">{{opt.profile.name}}</div>
+                                <div class="color-grey-700">{{opt.username}}</div>
                             </list-item>
                         </list>
                     </cards-content-scrollbar>
@@ -57,6 +62,7 @@
                 checkboxData: "",
                 showReveal: false,
                 selectedId: "",
+                selectedEnrollList: [],
             }
         },
         methods: {
@@ -74,8 +80,9 @@
                 // console.log(obj.getImageLink());
             },
             viewParticipant(id) {
-                this.showReveal = true;
                 this.selectedId = id;
+                this.showReveal = true;
+                
             },
             userFromId(id) {
                 return User.findOne(id);
@@ -92,16 +99,19 @@
                 activeEvents: [],
                 enrollUsers() {
                     if (this.selectedEvent) {
+                        this.selectedEnrollList = this.selectedEvent.enrollId;
                         return [this.selectedEvent.enrollId];
                     }
-
                     return [];
                 },
+            },
+            enrollUsers() {
+                let users = User.find();
+                return users;
             },
             events() {
                 return Event.find({},{sort:{dateStart: 1}});
             },
-            
         },
         
     }

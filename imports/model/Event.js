@@ -41,8 +41,10 @@ export const Event = Class.create({
         getImageLink() {
             let image = Images.findOne(this.imageId);
             if (image) {
-                return image._downloadRoute + "/images/" + image._id + "/original/" + image._id + "." + image.extension;
+                return image.link()
             }
+
+            return "";
         },
         isEnroll() {
             if (this.enrollId.indexOf(Meteor.userId()) > -1) {
