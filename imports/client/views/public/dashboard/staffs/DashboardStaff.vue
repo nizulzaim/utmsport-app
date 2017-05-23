@@ -29,7 +29,7 @@
                     <divider></divider>
                     <cards-action>
                         <div class="pull-right">
-                            <router-link to="/dashboard/booking/swimming">
+                            <router-link to="/dashboard/today-booking/swimming">
                                 <icon-button name="arrow-right" class="primary" v-ripple></icon-button>
                             </router-link>
                         </div>
@@ -46,7 +46,7 @@
                     <divider></divider>
                     <cards-action>
                         <div class="pull-right">
-                            <router-link to="/dashboard/booking/netball">
+                            <router-link to="/dashboard/today-booking/netball">
                                 <icon-button name="arrow-right" class="primary" v-ripple></icon-button>
                             </router-link>
                         </div>
@@ -63,7 +63,7 @@
                     <divider></divider>
                     <cards-action>
                         <div class="pull-right">
-                            <router-link to="/dashboard/booking/basketball">
+                            <router-link to="/dashboard/today-booking/basketball">
                                 <icon-button name="arrow-right" class="primary" v-ripple></icon-button>
                             </router-link>
                         </div>
@@ -80,7 +80,7 @@
                     <divider></divider>
                     <cards-action>
                         <div class="pull-right">
-                            <router-link to="/dashboard/booking/futsal">
+                            <router-link to="/dashboard/today-booking/futsal">
                                 <icon-button name="arrow-right" class="primary" v-ripple></icon-button>
                             </router-link>
                         </div>

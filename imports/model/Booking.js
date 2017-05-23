@@ -40,6 +40,12 @@ export const Booking = Class.create({
             }
             return this.time + ":00" + amOrPm;
         },
+        readableTimeSwimming() {
+            if (this.time === 8) return "8:30 - 10:30";
+            if (this.time === 11) return "11:00 - 13:00";
+            if (this.time === 14) return "14:00 - 16:00";
+            if (this.time === 16) return "16:30 - 18:30";
+        },
         user() {
             return User.findOne(this.userId);
         },
@@ -85,6 +91,9 @@ if (Meteor.isServer) {
                 let facId = fac._id;
                 var d = new Date();
                 d.setHours(0,0,0,0);
+                if (time) {
+                    return Booking.find({facility: facId, time, date: {$gt: d}});
+                }
                 return Booking.find({facility: facId, date: {$gt: d}});
             },
             children: [

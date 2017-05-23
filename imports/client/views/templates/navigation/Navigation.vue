@@ -11,12 +11,22 @@
                     <icon name="home"></icon> Dashboard
                 </nav-list>
             </router-link>
+            <router-link to="/dashboard/event-lists" exact v-if="loginUser.isAdmin() || loginUser.isStaff()">
+                <nav-list class="nav-item">
+                    <icon name="access-point"></icon> Event Lists
+                </nav-list>
+            </router-link>
             <nav-list class="nav-item" :sublist="true" v-if="loginUser.isAdmin() || loginUser.isStaff()">
                 <icon name="box-shadow"></icon> Today Booking
                 <span slot="sublist">
                     <router-link to="/dashboard/today-booking/badminton" v-if="loginUser.isStaff() || loginUser.isAdmin()" exact>
                         <nav-list class="nav-item">
                             <icon name="asterisk"></icon> Badminton
+                        </nav-list>
+                    </router-link>
+                    <router-link to="/dashboard/today-booking/swimming" v-if="loginUser.isStaff() || loginUser.isAdmin()" exact>
+                        <nav-list class="nav-item">
+                            <icon name="asterisk"></icon> Swimming
                         </nav-list>
                     </router-link>
                     <router-link to="/dashboard/today-booking/basketball" v-if="loginUser.isStaff() || loginUser.isAdmin()" exact>

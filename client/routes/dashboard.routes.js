@@ -10,9 +10,11 @@ import TodayBookingBadminton from '/imports/client/views/public/dashboard/staffs
 import TodayBookingBasketball from '/imports/client/views/public/dashboard/staffs/TodayBookingBasketball.vue';
 import TodayBookingFutsal from '/imports/client/views/public/dashboard/staffs/TodayBookingFutsal.vue';
 import TodayBookingNetball from '/imports/client/views/public/dashboard/staffs/TodayBookingNetball.vue';
+import TodayBookingSwimming from '/imports/client/views/public/dashboard/staffs/TodayBookingSwimming.vue';
 import CreateEvent from '/imports/client/views/public/dashboard/staffs/CreateEvent.vue';
 import PostedEvents from '/imports/client/views/public/dashboard/users/PostedEvents.vue';
 import AcceptEvent from '/imports/client/views/public/dashboard/staffs/AcceptEvent.vue';
+import EventLists from '/imports/client/views/public/dashboard/staffs/EventLists.vue';
 
 let routesParent = "/dashboard";
 export default [{
@@ -102,6 +104,25 @@ export default [{
     meta: { fixToolbar: true, depth: 1, pageTitle: "Today Booking Basketball" },
     components: {
         default: TodayBookingBasketball,
+        toolbar: Toolbar,
+        navigation: IndexNavigation,
+    }
+}, {
+    path: `${routesParent}/today-booking/swimming`,
+    name: "TodayBookingSwimming",
+    meta: { fixToolbar: true, depth: 1, pageTitle: "Today Booking Swimming" },
+    components: {
+        default: TodayBookingSwimming,
+        toolbar: Toolbar,
+        navigation: IndexNavigation,
+    }
+},
+{
+    path: `${routesParent}/event-lists`,
+    name: "EventLists",
+    meta: { fixToolbar: true, depth: 1, pageTitle: "Events" },
+    components: {
+        default: EventLists,
         toolbar: Toolbar,
         navigation: IndexNavigation,
     }

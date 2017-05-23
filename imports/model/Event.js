@@ -6,6 +6,7 @@ import {
 } from "meteor/meteor";
 
 import {Images} from "./Images";
+import {User} from "./User";
 
 export const Event = Class.create({
     name: "Event",
@@ -54,6 +55,9 @@ export const Event = Class.create({
             }
 
             return "";
+        },
+        users() {
+            return User.find({_id: {$in: this.enrollId}}).fetch();
         },
         isEnroll() {
             if (this.enrollId.indexOf(Meteor.userId()) > -1) {
@@ -125,6 +129,13 @@ if (Meteor.isServer) {
                     find: function(event) {
                         return Images.find(event.imageId).cursor;
                     },
+                    
+                },
+                {
+                    find: function(event) {
+                        return User.find({_id: {$in: event.enrollId}});
+                    },
+                    
                 }
             ]
         };
@@ -142,6 +153,13 @@ if (Meteor.isServer) {
                     find: function(event) {
                         return Images.find(event.imageId).cursor;
                     },
+                    
+                },
+                {
+                    find: function(event) {
+                        return User.find({_id: {$in: event.enrollId}});
+                    },
+                    
                 }
             ]
         };
