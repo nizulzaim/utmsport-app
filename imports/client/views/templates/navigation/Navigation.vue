@@ -6,6 +6,11 @@
                     <icon name="home"></icon> News & Activities
                 </nav-list>
             </router-link>
+             <router-link to="/dashboard" exact v-if="loginUser.isAdmin() || loginUser.isStaff()">
+                <nav-list class="nav-item">
+                    <icon name="home"></icon> Dashboard
+                </nav-list>
+            </router-link>
             <nav-list class="nav-item" :sublist="true" v-if="loginUser.isAdmin() || loginUser.isStaff()">
                 <icon name="box-shadow"></icon> Today Booking
                 <span slot="sublist">
@@ -31,14 +36,19 @@
                     </router-link>
                 </span>
             </nav-list>
-            <router-link  v-if="loginUser.isAdmin() || loginUser.isUser()" to="/dashboard/create-event" exact>
+            <router-link  to="/dashboard/create-event" exact>
                 <nav-list class="nav-item">
                     <icon name="pencil"></icon> Create Event
                 </nav-list>
             </router-link>
-            <router-link  v-if="loginUser.isAdmin() || loginUser.isUser()" to="/dashboard/posted-events" exact>
+            <router-link  v-if="loginUser.isUser()" to="/dashboard/posted-events" exact>
                 <nav-list class="nav-item">
                     <icon name="access-point"></icon> My Posted Events
+                </nav-list>
+            </router-link>
+            <router-link  v-if="loginUser.isAdmin() " to="/dashboard/events-waiting" exact>
+                <nav-list class="nav-item">
+                    <icon name="access-point"></icon> Accept Events
                 </nav-list>
             </router-link>
             <nav-list class="nav-item" :sublist="true" v-if="loginUser.isUser()">
@@ -47,6 +57,11 @@
                     <router-link to="/dashboard/booking/badminton" exact>
                         <nav-list class="nav-item">
                             <icon name="asterisk"></icon> Badminton
+                        </nav-list>
+                    </router-link>
+                    <router-link to="/dashboard/booking/swimming" exact>
+                        <nav-list class="nav-item">
+                            <icon name="asterisk"></icon> Swimming Pool
                         </nav-list>
                     </router-link>
                     <router-link to="/dashboard/booking/futsal" exact>

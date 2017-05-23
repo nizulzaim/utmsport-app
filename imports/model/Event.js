@@ -22,6 +22,15 @@ export const Event = Class.create({
         contactNumber: String,
         imageId: String,
         userId: String,
+        status: {
+            type: Number,
+            default: 0,
+        },
+        loves: {
+            type: [String],
+            default: [],
+            optional: true,
+        },
         enrollId: {type: [String], optional: true, default: []},
     },
     behaviors: {
@@ -52,6 +61,13 @@ export const Event = Class.create({
             }
 
             return false;
+        },
+        isLove() {
+            if (this.loves.indexOf(Meteor.userId()) > -1){
+                return true;
+            }
+
+            return false;
         }
     }
 });
@@ -67,11 +83,30 @@ if (Meteor.isServer) {
                 this.imageId = obj.imageId;
                 this.userId = Meteor.userId();
 
+                if (Meteor.user().profile.userType !== 0) {
+                    this.status = 0;
+                } else {
+                    this.status = 1;
+                }
+
                 this.dateStart = new Date(obj.dateStart.year,obj.dateStart.month, obj.dateStart.day,parseInt(obj.dateStart.hourMinute) );
                 return this.save();
             },
             enroll() {
                 this.enrollId.push(Meteor.userId());
+                return this.save();
+            },
+            accept() {
+                this.status = 1;
+                return this.save();
+            },
+            loves() {
+                var index = this.loves.indexOf(Meteor.userId());
+                if (index >= 0) {
+                    this.loves.splice(index, 1);
+                } else {
+                    this.loves.push(Meteor.userId());
+                }
                 return this.save();
             }
         },
@@ -83,7 +118,7 @@ if (Meteor.isServer) {
             find: function() {
                 var d = new Date();
                 d.setHours(0,0,0,0);
-                return Event.find({dateStart: {$gt: d}}, {sort: {dateStart: -1}});
+                return Event.find({status: 1,dateStart: {$gt: d}}, {sort: {dateStart: -1}});
             },
             children: [
                 {
@@ -101,6 +136,24 @@ if (Meteor.isServer) {
                 var d = new Date();
                 d.setHours(0,0,0,0);
                 return Event.find({userId: this.userId});
+            },
+            children: [
+                {
+                    find: function(event) {
+                        return Images.find(event.imageId).cursor;
+                    },
+                }
+            ]
+        };
+    });
+
+    Meteor.publishComposite('waitingEvents', function() {
+        return {
+            find: function() {
+                var d = new Date();
+                d.setHours(0,0,0,0);
+                console.log(Event.findOne({status: 0}));
+                return Event.find({status: 0});
             },
             children: [
                 {

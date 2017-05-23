@@ -82,7 +82,7 @@
                             <divider></divider>
                             <cards-action>
                                 <div class="pull-right">
-                                    <color-button type="submit" class="primary" v-ripple><icon name="plus"></icon> Create</color-button>
+                                    <color-button type="submit" class="primary" v-ripple><icon name="plus"></icon> Submit</color-button>
                                 </div>
                             </cards-action>
                         </form>

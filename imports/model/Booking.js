@@ -85,7 +85,7 @@ if (Meteor.isServer) {
                 let facId = fac._id;
                 var d = new Date();
                 d.setHours(0,0,0,0);
-                return Booking.find({facility: facId, time, date: {$gt: d}});
+                return Booking.find({facility: facId, date: {$gt: d}});
             },
             children: [
                 {

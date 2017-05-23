@@ -1,6 +1,7 @@
 import {IndexNavigation, Toolbar} from "/imports/client/template";
 import Dashboard from '/imports/client/views/public/dashboard/Dashboard.vue';
 import BookBadminton from '/imports/client/views/public/dashboard/users/BookBadminton.vue';
+import BookSwimming from '/imports/client/views/public/dashboard/users/BookSwimming.vue';
 import BookFutsal from '/imports/client/views/public/dashboard/users/BookFutsal.vue';
 import BookBasketball from '/imports/client/views/public/dashboard/users/BookBasketball.vue';
 import BookNetball from '/imports/client/views/public/dashboard/users/BookNetball.vue';
@@ -11,6 +12,7 @@ import TodayBookingFutsal from '/imports/client/views/public/dashboard/staffs/To
 import TodayBookingNetball from '/imports/client/views/public/dashboard/staffs/TodayBookingNetball.vue';
 import CreateEvent from '/imports/client/views/public/dashboard/staffs/CreateEvent.vue';
 import PostedEvents from '/imports/client/views/public/dashboard/users/PostedEvents.vue';
+import AcceptEvent from '/imports/client/views/public/dashboard/staffs/AcceptEvent.vue';
 
 let routesParent = "/dashboard";
 export default [{
@@ -28,6 +30,15 @@ export default [{
     meta: { fixToolbar: true, depth: 1, pageTitle: "Booking: Badminton" },
     components: {
         default: BookBadminton,
+        toolbar: Toolbar,
+        navigation: IndexNavigation,
+    }
+},{
+    path: `${routesParent}/booking/swimming`,
+    name: "BookSwimming",
+    meta: { fixToolbar: true, depth: 1, pageTitle: "Booking: Swimming" },
+    components: {
+        default: BookSwimming,
         toolbar: Toolbar,
         navigation: IndexNavigation,
     }
@@ -118,6 +129,15 @@ export default [{
     meta: { fixToolbar: true, depth: 1, pageTitle: "Posted Events" },
     components: {
         default: PostedEvents,
+        toolbar: Toolbar,
+        navigation: IndexNavigation,
+    }
+},  {
+    path: `${routesParent}/events-waiting`,
+    name: "AcceptEvent",
+    meta: { fixToolbar: true, depth: 1, pageTitle: "Accept Events" },
+    components: {
+        default: AcceptEvent,
         toolbar: Toolbar,
         navigation: IndexNavigation,
     }

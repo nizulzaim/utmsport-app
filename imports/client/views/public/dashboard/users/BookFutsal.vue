@@ -33,7 +33,7 @@
                 </div>
             </cards>
 
-            <div class="row has-small-gutter" v-if="time">
+            <div class="row has-small-gutter" v-if="time && globalAvailable">
                 <div class="col-xs-fluid-24">
                     <div class="font-headline">Court Lists</div>
                 </div>
@@ -42,6 +42,15 @@
                         <cards-content>
                             <div v-if="court.available" @click="bookCourt(court.id)" class="font-center font-display1 no-margin color-white">{{court.id}}</div>
                             <div v-else class="font-center font-display1 no-margin color-white">{{court.id}}</div>
+                        </cards-content>
+                    </cards>
+                </div>
+            </div>
+            <div class="row has-small-gutter" v-if="time && !globalAvailable">
+                <div class="col-xs-fluid-24">
+                    <cards class="background-theme color-white">
+                        <cards-content>
+                            You already book for today. Only 1 court can be book by student everyday. Thank you
                         </cards-content>
                     </cards>
                 </div>
@@ -59,7 +68,8 @@
             return {
                 availableTime: [],
                 time: "",
-                courts: []
+                courts: [],
+                globalAvailable: true,
             }
         },
         mounted() {
@@ -100,20 +110,28 @@
             },
             books() {
                 this.courts = [];
-                
-                for (let i = 1; i <= 4; i++) {
+                let books = Booking.find();
+                if (books) {
+                    let b = Booking.findOne({userId: Meteor.userId()});
+
+                    if (b) {
+                        this.globalAvailable = false;
+                    }
+                }
+
+                for (let i = 1; i <= 10; i++) {
                     let book = Booking.findOne({time: this.time, number: i});
                     let available = true;
-
                     if (book) {
-                        available = false;
+                        available = false ;
                     }
+
                     this.courts.push({
                         id: i,
                         available,
                     })
                 }
-                return Booking.find();
+                return books;
             }
         },
     }

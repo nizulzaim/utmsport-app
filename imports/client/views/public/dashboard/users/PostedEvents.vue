@@ -1,7 +1,7 @@
 <template>
     <div class="appbar-padding">
         <page-container>
-            <cards v-for="ev in events">
+            <cards v-for="ev in eventsComputed" :key="ev._id">
                 <cards-image :img="ev.getImageLink()" v-ripple></cards-image>
                 <cards-content>
                     <div class="font-subhead no-margin">Event Date: {{ev.dateStart | moment("DD MMMM YYYY")}}</div>
@@ -11,12 +11,13 @@
                     <div class="font-subhead no-margin">Contact Number: {{ev.contactNumber }}</div>
                 </cards-content>
                 <divider></divider>
-                <cards-action>
+                <cards-action v-if="ev.status === 1">
                     <flat-button v-ripple class="primary" v-if="ev.isEnroll() === false" @click="register(ev)">Register</flat-button>
                     <flat-button v-ripple class="primary" v-else @click="viewParticipant(ev._id)">View Participant</flat-button>
         
                     <div class="pull-right">
-                        <checkbox v-model="checkboxData" class="pink" check-icon="heart" uncheck-icon="heart-outline"></checkbox>
+                        <span style="line-height: 48px; padding-right: 12px;">{{ev.loveCount}}</span>
+                        <checkbox v-model="ev.asLove" @click="loves(ev)" class="pink" check-icon="heart" uncheck-icon="heart-outline"></checkbox>
                     </div>
                 </cards-action>
             </cards>
@@ -86,6 +87,15 @@
                 this.showReveal = true;
                 
             },
+            loves(obj) {
+                obj.callMethod("loves", (err, res)=> {
+                    if (err) {
+                        return this.$snackbar.run("Error when trying to love to this event");
+                    }
+
+                    return this.$snackbar.run("Successfully love to this event");
+                })
+            },
             userFromId(id) {
                 return User.findOne(id);
             }
@@ -94,11 +104,25 @@
             selectedEvent() {
                 return Event.findOne(this.selectedId);
             },
+            eventsComputed() {
+                let evs = this.events;
+                evs.forEach(item=> {
+                    item.asLove = item.isLove();
+                    item.loveCount = item.loves.length;
+                })
+
+                evs.sort((a, b)=> {
+                    let aN = a.asLove ? 10 : -10;
+                    let bN = b.asLove ? 10 : -10;
+                    return bN - aN;
+                })
+                return evs;
+            }
             
         },
         meteor : {
             subscribe: {
-                activeEvents: [],
+                postedEvents: [],
                 enrollUsers() {
                     if (this.selectedEvent) {
                         this.selectedEnrollList = this.selectedEvent.enrollId;
